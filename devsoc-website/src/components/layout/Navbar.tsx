@@ -3,7 +3,12 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const NAV_LINKS = ["PROJECTS", "EVENTS", "ABOUT", "BLOG"];
+const NAV_LINKS = [
+  { label: "PROJECTS", href: "/projects" },
+  { label: "EVENTS", href: "/events" },
+  { label: "ABOUT", href: "/about" },
+  { label: "BLOG", href: "/blog" },
+];
 
 export default function Navbar() {
   const [isHidden, setIsHidden] = useState(false);
@@ -48,7 +53,7 @@ export default function Navbar() {
           }}
         >
           {/* Logo / Brand */}
-          <a href="#" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "10px" }}>
+          <a href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "10px" }}>
             {/* Bracket + wordmark */}
             <span
               style={{
@@ -89,7 +94,7 @@ export default function Navbar() {
           {/* Nav links */}
           <div style={{ display: "flex", alignItems: "center", gap: "48px" }}>
             {NAV_LINKS.map((link) => (
-              <NavLink key={link} label={link} />
+              <NavLink key={link.label} label={link.label} href={link.href} />
             ))}
           </div>
 
@@ -101,12 +106,12 @@ export default function Navbar() {
   );
 }
 
-function NavLink({ label }: { label: string }) {
+function NavLink({ label, href }: { label: string; href: string }) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <a
-      href="#"
+      href={href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -143,6 +148,7 @@ function JoinButton() {
   const [hovered, setHovered] = useState(false);
 
   return (
+    <a href="/join" style={{ textDecoration: "none" }}>
     <button
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -176,5 +182,6 @@ function JoinButton() {
         JOIN US
       </span>
     </button>
+    </a>
   );
 }
