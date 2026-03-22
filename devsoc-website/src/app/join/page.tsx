@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Section5Contact from "@/components/sections/Section5Contact";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import testimonials from "@/data/testimonials";
+import { useResponsive } from "@/components/ui/useResponsive";
 
 const YELLOW = "#edf738";
 const YELLOW_MUTED = "rgba(237, 247, 56, 0.35)";
@@ -174,17 +175,18 @@ export default function JoinPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [selectedTrack, setSelectedTrack] = useState("PROJECT");
   const [submitted, setSubmitted] = useState(false);
+  const { isMobile, isTablet, mx, sp } = useResponsive();
 
   return (
     <main style={{ position: "relative", backgroundColor: "#070707", overflowX: "hidden" }}>
 
       {/* ── HERO ─────────────────────────────────────────── */}
-      <div data-cursor-color={YELLOW} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-        <div style={{ margin: "0 40px" }}>
+      <div data-cursor-color={YELLOW} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+        <div style={{ margin: mx }}>
           <Navbar />
         </div>
-        <div style={{ margin: "0 40px", padding: "9em 5.56em 5em" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
+        <div style={{ margin: mx, padding: isMobile ? "6em 0 3em" : `9em ${sp} 5em` }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "2em" : "80px", alignItems: "center" }}>
 
             {/* Left */}
             <AnimatedSection>
@@ -273,14 +275,14 @@ export default function JoinPage() {
       </div>
 
       {/* ── BENEFITS STRIP ───────────────────────────────── */}
-      <div data-cursor-color={YELLOW} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
+      <div data-cursor-color={YELLOW} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
         <AnimatedSection>
           <div style={{
-            margin: "0 40px",
+            margin: mx,
             borderTop: `1px solid ${YELLOW_BORDER}`,
             borderBottom: `1px solid ${YELLOW_BORDER}`,
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
+            gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)",
           }}>
             {benefits.map((b, i) => (
               <div key={i} style={{
@@ -316,8 +318,8 @@ export default function JoinPage() {
       </div>
 
       {/* ── TRACKS ───────────────────────────────────────── */}
-      <div id="tracks" data-cursor-color={YELLOW} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-        <div style={{ margin: "0 40px", padding: "5em 5.56em" }}>
+      <div id="tracks" data-cursor-color={YELLOW} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+        <div style={{ margin: mx, padding: isMobile ? "3em 0" : `5em ${sp}` }}>
           <AnimatedSection style={{ marginBottom: "2.5em" }}>
             <span style={{
               fontFamily: "var(--font-newforest), serif",
@@ -346,7 +348,7 @@ export default function JoinPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "2px" }}
+            style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: "2px" }}
           >
             {tracks.map((track) => (
               <motion.div
@@ -422,10 +424,10 @@ export default function JoinPage() {
       </div>
 
       {/* ── TESTIMONIALS ─────────────────────────────────── */}
-      <div data-cursor-color={YELLOW} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
+      <div data-cursor-color={YELLOW} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
         <div style={{
-          margin: "0 40px",
-          padding: "4em 5.56em",
+          margin: mx,
+          padding: isMobile ? "3em 0" : `4em ${sp}`,
           borderTop: `1px solid rgba(255,255,255,0.07)`,
         }}>
           <AnimatedSection style={{ marginBottom: "2.5em" }}>
@@ -456,7 +458,7 @@ export default function JoinPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px" }}
+            style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "2px" }}
           >
             {testimonials.map((t, idx) => (
               <motion.div
@@ -537,14 +539,14 @@ export default function JoinPage() {
       </div>
 
       {/* ── APPLICATION FORM ─────────────────────────────── */}
-      <div id="apply" data-cursor-color={YELLOW} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
+      <div id="apply" data-cursor-color={YELLOW} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
         <div style={{
-          margin: "0 40px",
-          padding: "5em 5.56em",
+          margin: mx,
+          padding: isMobile ? "3em 0" : `5em ${sp}`,
           borderTop: `1px solid rgba(255,255,255,0.07)`,
           display: "grid",
-          gridTemplateColumns: "1fr 1.4fr",
-          gap: "80px",
+          gridTemplateColumns: isMobile ? "1fr" : "1fr 1.4fr",
+          gap: isMobile ? "2em" : "80px",
           alignItems: "start",
         }}>
 
@@ -767,14 +769,14 @@ export default function JoinPage() {
       </div>
 
       {/* ── FAQ ──────────────────────────────────────────── */}
-      <div data-cursor-color={YELLOW} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
+      <div data-cursor-color={YELLOW} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
         <div style={{
-          margin: "0 40px",
-          padding: "4em 5.56em",
+          margin: mx,
+          padding: isMobile ? "3em 0" : `4em ${sp}`,
           borderTop: `1px solid rgba(255,255,255,0.07)`,
           display: "grid",
-          gridTemplateColumns: "1fr 2fr",
-          gap: "80px",
+          gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr",
+          gap: isMobile ? "1.5em" : "80px",
         }}>
           <AnimatedSection>
             <span style={{

@@ -4,6 +4,7 @@ import { motion, type Variants } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Section5Contact from "@/components/sections/Section5Contact";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import { useResponsive } from "@/components/ui/useResponsive";
 
 const WHITE = "rgba(255,255,255,0.9)";
 const MUTED = "rgba(255,255,255,0.4)";
@@ -173,20 +174,22 @@ const staggerVariants: Variants = {
 };
 
 export default function AboutPage() {
+  const { isMobile, isTablet, mx, sp } = useResponsive();
+
   return (
     <main style={{ position: "relative", backgroundColor: "#070707", overflowX: "hidden" }}>
 
       {/* ── HERO ─────────────────────────────────────────── */}
-      <div data-cursor-color={YELLOW} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-        <div style={{ margin: "0 40px" }}>
+      <div data-cursor-color={YELLOW} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+        <div style={{ margin: mx }}>
           <Navbar />
         </div>
-        <div style={{ margin: "0 40px", padding: "9em 5.56em 5em" }}>
+        <div style={{ margin: mx, padding: isMobile ? "6em 0 3em" : `9em ${sp} 5em` }}>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "60px",
+              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+              gap: isMobile ? "2em" : "60px",
               alignItems: "center",
             }}
           >
@@ -253,11 +256,11 @@ export default function AboutPage() {
       </div>
 
       {/* ── MISSION STATEMENT ─────────────────────────────── */}
-      <div data-cursor-color={YELLOW} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
+      <div data-cursor-color={YELLOW} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
         <div
           style={{
-            margin: "0 40px",
-            padding: "3em 5.56em",
+            margin: mx,
+            padding: isMobile ? "2em 0" : `3em ${sp}`,
             borderTop: "1px solid rgba(255,255,255,0.08)",
           }}
         >
@@ -297,8 +300,8 @@ export default function AboutPage() {
       </div>
 
       {/* ── VALUES ───────────────────────────────────────── */}
-      <div data-cursor-color={YELLOW} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-        <div style={{ margin: "0 40px", padding: "4em 5.56em" }}>
+      <div data-cursor-color={YELLOW} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+        <div style={{ margin: mx, padding: isMobile ? "3em 0" : `4em ${sp}` }}>
           <AnimatedSection style={{ marginBottom: "2.5em" }}>
             <span
               style={{
@@ -331,7 +334,7 @@ export default function AboutPage() {
             viewport={{ once: true, amount: 0.1 }}
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
+              gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr 1fr" : "repeat(3, 1fr)",
               gap: "2px",
             }}
           >
@@ -409,11 +412,11 @@ export default function AboutPage() {
       </div>
 
       {/* ── LEADERSHIP TEAM ──────────────────────────────── */}
-      <div data-cursor-color={YELLOW} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
+      <div data-cursor-color={YELLOW} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
         <div
           style={{
-            margin: "0 40px",
-            padding: "4em 5.56em",
+            margin: mx,
+            padding: isMobile ? "3em 0" : `4em ${sp}`,
             borderTop: "1px solid rgba(255,255,255,0.08)",
           }}
         >
@@ -421,7 +424,7 @@ export default function AboutPage() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 8fr",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 8fr",
                 gap: "2em",
                 alignItems: "flex-end",
               }}
@@ -472,7 +475,7 @@ export default function AboutPage() {
             viewport={{ once: true, amount: 0.1 }}
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
+              gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)",
               gap: "2px",
             }}
           >
@@ -569,11 +572,11 @@ export default function AboutPage() {
       </div>
 
       {/* ── TECHNICAL TEAM ───────────────────────────────── */}
-      <div data-cursor-color={BLUE} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
+      <div data-cursor-color={BLUE} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
         <div
           style={{
-            margin: "0 40px",
-            padding: "4em 5.56em",
+            margin: mx,
+            padding: isMobile ? "3em 0" : `4em ${sp}`,
             borderTop: "1px solid rgba(255,255,255,0.08)",
           }}
         >
@@ -617,7 +620,7 @@ export default function AboutPage() {
                 variants={cardVariants}
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "60px 1fr 1fr 80px",
+                  gridTemplateColumns: isMobile ? "1fr 1fr" : "60px 1fr 1fr 80px",
                   alignItems: "center",
                   padding: "1.5em 0",
                   borderBottom: "1px solid rgba(255,255,255,0.07)",
@@ -697,15 +700,15 @@ export default function AboutPage() {
       </div>
 
       {/* ── JOIN THE TEAM CTA ─────────────────────────────── */}
-      <div data-cursor-color={YELLOW} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
+      <div data-cursor-color={YELLOW} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
         <div
           style={{
-            margin: "0 40px",
-            padding: "5em 5.56em",
+            margin: mx,
+            padding: isMobile ? "3em 0" : `5em ${sp}`,
             borderTop: "1px solid rgba(255,255,255,0.08)",
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "80px",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: isMobile ? "2em" : "80px",
             alignItems: "center",
           }}
         >

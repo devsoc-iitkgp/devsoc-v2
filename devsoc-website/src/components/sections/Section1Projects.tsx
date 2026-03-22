@@ -5,6 +5,7 @@ import Image from "next/image";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import projectData from "@/data/projects";
 import { Project } from "@/data/projects";
+import { useResponsive } from "@/components/ui/useResponsive";
 
 const gridVariants: Variants = {
   hidden: {},
@@ -30,39 +31,14 @@ function ProjectCard({ project }: { project: Project }) {
         style={{ width: "100%", height: "auto", objectFit: "cover" }}
       />
       <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
-        <Image
-          src={project.vectorSrc}
-          alt=""
-          width={20}
-          height={20}
-          style={{ backgroundColor: "transparent" }}
-        />
-        <h3
-          style={{
-            fontFamily: "var(--font-byrd), sans-serif",
-            fontSize: "1.3em",
-            fontWeight: 900,
-            textTransform: "uppercase",
-          }}
-        >
+        <Image src={project.vectorSrc} alt="" width={20} height={20} style={{ backgroundColor: "transparent" }} />
+        <h3 style={{ fontFamily: "var(--font-byrd), sans-serif", fontSize: "1.3em", fontWeight: 900, textTransform: "uppercase" }}>
           {project.title}
         </h3>
       </div>
-      <div style={{ display: "flex", alignItems: "center", columnGap: "8px" }}>
+      <div style={{ display: "flex", alignItems: "center", columnGap: "8px", flexWrap: "wrap", gap: "6px" }}>
         {project.tags.map((tag, idx) => (
-          <span
-            key={idx}
-            style={{
-              backgroundColor: "white",
-              color: "black",
-              textTransform: "lowercase",
-              borderRadius: "2px",
-              padding: "2px 4px",
-              fontFamily: "var(--font-byrd), sans-serif",
-              fontSize: "0.75rem",
-              fontWeight: 800,
-            }}
-          >
+          <span key={idx} style={{ backgroundColor: "white", color: "black", textTransform: "lowercase", borderRadius: "2px", padding: "2px 4px", fontFamily: "var(--font-byrd), sans-serif", fontSize: "0.75rem", fontWeight: 800 }}>
             {tag}
           </span>
         ))}
@@ -72,69 +48,36 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export default function Section1Projects() {
+  const { isMobile, isTablet, mx, sp } = useResponsive();
+
   return (
-    <div data-cursor-color="#edf738" style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-      <div style={{ margin: "0 40px", padding: "5.56em" }}>
+    <div data-cursor-color="#edf738" style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+      <div style={{ margin: mx, padding: sp }}>
         {/* Header */}
         <AnimatedSection
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 8fr 2fr",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 8fr 2fr",
+            gap: "12px",
           }}
         >
-          <div
-            style={{
-              fontFamily: "var(--font-newforest), serif",
-              fontSize: "2em",
-              fontStyle: "italic",
-              fontWeight: 400,
-              lineHeight: 1.2,
-            }}
-          >
-            Work
-          </div>
+          {!isMobile && (
+            <div style={{ fontFamily: "var(--font-newforest), serif", fontSize: "2em", fontStyle: "italic", fontWeight: 400, lineHeight: 1.2 }}>
+              Work
+            </div>
+          )}
           <div>
-            <div>
-              <h2
-                style={{
-                  fontFamily: "var(--font-byrd), sans-serif",
-                  fontSize: "3.5em",
-                  fontWeight: 900,
-                  textTransform: "uppercase",
-                  lineHeight: 1.2,
-                }}
-              >
-                DISCOVER
-              </h2>
-            </div>
-            <div>
-              <h2
-                style={{
-                  fontFamily: "var(--font-byrd), sans-serif",
-                  fontSize: "3.5em",
-                  fontWeight: 900,
-                  textTransform: "uppercase",
-                  lineHeight: 1.2,
-                }}
-              >
-                OUR PROJECTS
-              </h2>
-            </div>
+            <h2 style={{ fontFamily: "var(--font-byrd), sans-serif", fontSize: isMobile ? "2.2em" : "3.5em", fontWeight: 900, textTransform: "uppercase", lineHeight: 1.2 }}>DISCOVER</h2>
+            <h2 style={{ fontFamily: "var(--font-byrd), sans-serif", fontSize: isMobile ? "2.2em" : "3.5em", fontWeight: 900, textTransform: "uppercase", lineHeight: 1.2 }}>OUR PROJECTS</h2>
           </div>
-          <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-end" }}>
-            <button
-              style={{
-                border: "1px solid white",
-                backgroundColor: "transparent",
-                fontFamily: "var(--font-byrd), sans-serif",
-              }}
-            >
-              CONTACT US
-            </button>
-          </div>
+          {!isMobile && (
+            <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-end" }}>
+              <button style={{ border: "1px solid white", backgroundColor: "transparent", fontFamily: "var(--font-byrd), sans-serif" }}>CONTACT US</button>
+            </div>
+          )}
         </AnimatedSection>
 
-        {/* Grid row 1 */}
+        {/* Projects grid — all 4 in one responsive grid */}
         <motion.div
           variants={gridVariants}
           initial="hidden"
@@ -143,31 +86,11 @@ export default function Section1Projects() {
           style={{
             marginTop: "4.65em",
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            columnGap: "15px",
-            rowGap: "15px",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: "15px",
           }}
         >
-          {projectData.folio1.map((project, idx) => (
-            <ProjectCard key={idx} project={project} />
-          ))}
-        </motion.div>
-
-        {/* Grid row 2 */}
-        <motion.div
-          variants={gridVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          style={{
-            marginTop: "15px",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            columnGap: "15px",
-            rowGap: "15px",
-          }}
-        >
-          {projectData.folio2.map((project, idx) => (
+          {[...projectData.folio1, ...projectData.folio2].map((project, idx) => (
             <ProjectCard key={idx} project={project} />
           ))}
         </motion.div>

@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Section5Contact from "@/components/sections/Section5Contact";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import type { BlogPost } from "@/data/blogPosts";
+import { useResponsive } from "@/components/ui/useResponsive";
 
 const RED = "#dc2b46";
 const RED_BORDER = "rgba(220, 43, 70, 0.22)";
@@ -29,6 +30,7 @@ export default function BlogPostView({ post, allPosts }: { post: BlogPost; allPo
   const [activeId, setActiveId] = useState(post.sections[0]?.id ?? "");
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const { isMobile, isTablet, mx, sp } = useResponsive();
 
   const relatedPosts = allPosts.filter((p) => post.relatedSlugs.includes(p.slug));
   const authorInitials = post.author.split(" ").map((n) => n[0]).join("");
@@ -67,13 +69,13 @@ export default function BlogPostView({ post, allPosts }: { post: BlogPost; allPo
       />
 
       {/* Navbar */}
-      <div data-cursor-color={RED} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-        <div style={{ margin: "0 40px" }}>
+      <div data-cursor-color={RED} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+        <div style={{ margin: mx }}>
           <Navbar />
         </div>
 
         {/* Hero */}
-        <div style={{ margin: "0 40px", padding: "8em 5.56em 3em" }}>
+        <div style={{ margin: mx, padding: isMobile ? "6em 0 2em" : `8em ${sp} 3em` }}>
           {/* Breadcrumb */}
           <AnimatedSection>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "2em" }}>
@@ -129,10 +131,10 @@ export default function BlogPostView({ post, allPosts }: { post: BlogPost; allPo
         {/* Main 2-col grid */}
         <div style={{
           margin: "0 40px",
-          padding: "0 5.56em 5em",
+          padding: isMobile ? "0 0 3em" : `0 ${sp} 5em`,
           display: "grid",
-          gridTemplateColumns: "1fr 300px",
-          gap: "80px",
+          gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr 260px" : "1fr 300px",
+          gap: isMobile ? "0" : "80px",
           alignItems: "start",
         }}>
 
@@ -231,7 +233,8 @@ export default function BlogPostView({ post, allPosts }: { post: BlogPost; allPo
             </div>
           </article>
 
-          {/* Sticky sidebar */}
+          {/* Sticky sidebar — hidden on mobile */}
+          {!isMobile && (
           <aside style={{ position: "sticky", top: "100px", display: "flex", flexDirection: "column", gap: "2px" }}>
 
             {/* TOC */}
@@ -312,7 +315,15 @@ export default function BlogPostView({ post, allPosts }: { post: BlogPost; allPo
               </div>
             </a>
           </aside>
+          )}
         </div>
+
+        {/* Mobile back link */}
+        {isMobile && (
+          <div style={{ margin: mx, paddingBottom: "2em" }}>
+            <a href="/blog" style={{ textDecoration: "none", fontFamily: "var(--font-byrd), sans-serif", fontSize: "0.7rem", color: RED, letterSpacing: "2px" }}>← ALL POSTS</a>
+          </div>
+        )}
       </div>
 
       <Section5Contact />

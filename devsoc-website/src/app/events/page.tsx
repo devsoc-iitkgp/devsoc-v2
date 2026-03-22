@@ -4,6 +4,7 @@ import { motion, type Variants } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Section5Contact from "@/components/sections/Section5Contact";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import { useResponsive } from "@/components/ui/useResponsive";
 
 const BLUE = "#3e6dd9";
 const BLUE_MUTED = "rgba(62, 109, 217, 0.35)";
@@ -146,20 +147,22 @@ const gridVariants: Variants = {
 };
 
 export default function EventsPage() {
+  const { isMobile, isTablet, mx, sp } = useResponsive();
+
   return (
     <main style={{ position: "relative", backgroundColor: "#070707", overflowX: "hidden" }}>
 
       {/* ── HERO ─────────────────────────────────────────── */}
-      <div data-cursor-color={BLUE} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-        <div style={{ margin: "0 40px" }}>
+      <div data-cursor-color={BLUE} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+        <div style={{ margin: mx }}>
           <Navbar />
         </div>
-        <div style={{ margin: "0 40px", padding: "9em 5.56em 5em" }}>
+        <div style={{ margin: mx, padding: isMobile ? "6em 0 3em" : `9em ${sp} 5em` }}>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "80px",
+              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+              gap: isMobile ? "2em" : "80px",
               alignItems: "center",
             }}
           >
@@ -247,17 +250,19 @@ export default function EventsPage() {
               </div>
             </AnimatedSection>
 
-            {/* Right: Circuit vector */}
-            <AnimatedSection direction="right">
-              <CircuitVector />
-            </AnimatedSection>
+            {/* Right: Circuit vector — hide on mobile */}
+            {!isMobile && (
+              <AnimatedSection direction="right">
+                <CircuitVector />
+              </AnimatedSection>
+            )}
           </div>
         </div>
       </div>
 
       {/* ── UPCOMING EVENTS ──────────────────────────────── */}
-      <div data-cursor-color={BLUE} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-        <div style={{ margin: "0 40px", padding: "1em 5.56em 4em" }}>
+      <div data-cursor-color={BLUE} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+        <div style={{ margin: mx, padding: isMobile ? `1em 0 3em` : `1em ${sp} 4em` }}>
           {/* Section header */}
           <AnimatedSection
             style={{
@@ -316,7 +321,7 @@ export default function EventsPage() {
             viewport={{ once: true, amount: 0.1 }}
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
+              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
               gap: "2px",
             }}
           >
@@ -434,16 +439,16 @@ export default function EventsPage() {
       </div>
 
       {/* ── WORKSHOP SERIES HIGHLIGHT ─────────────────────── */}
-      <div data-cursor-color={BLUE} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
+      <div data-cursor-color={BLUE} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
         <div
           style={{
-            margin: "0 40px",
-            padding: "2em 5.56em",
+            margin: mx,
+            padding: isMobile ? "2em 0" : `2em ${sp}`,
             borderTop: `1px solid ${BLUE_BORDER}`,
             borderBottom: `1px solid ${BLUE_BORDER}`,
             display: "grid",
-            gridTemplateColumns: "1fr 1.2fr",
-            gap: "80px",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1.2fr",
+            gap: isMobile ? "2em" : "80px",
             alignItems: "center",
           }}
         >
@@ -538,8 +543,8 @@ export default function EventsPage() {
       </div>
 
       {/* ── PAST EVENTS ──────────────────────────────────── */}
-      <div data-cursor-color={BLUE} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-        <div style={{ margin: "0 40px", padding: "4em 5.56em" }}>
+      <div data-cursor-color={BLUE} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+        <div style={{ margin: mx, padding: isMobile ? "3em 0" : `4em ${sp}` }}>
           <AnimatedSection style={{ marginBottom: "2em" }}>
             <span
               style={{
@@ -572,11 +577,11 @@ export default function EventsPage() {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "140px 1fr 120px",
+                    gridTemplateColumns: isMobile ? "80px 1fr" : "140px 1fr 120px",
                     alignItems: "center",
                     padding: "1.4em 0",
                     borderBottom: "1px solid rgba(255,255,255,0.07)",
-                    gap: "2em",
+                    gap: isMobile ? "1em" : "2em",
                   }}
                 >
                   <span

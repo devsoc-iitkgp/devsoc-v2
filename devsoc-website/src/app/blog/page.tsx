@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Section5Contact from "@/components/sections/Section5Contact";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import blogPosts from "@/data/blogPosts";
+import { useResponsive } from "@/components/ui/useResponsive";
 
 const posts = blogPosts;
 
@@ -122,6 +123,7 @@ const gridVariants: Variants = {
 
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("ALL");
+  const { isMobile, isTablet, mx, sp } = useResponsive();
 
   const featured = posts.find((p) => p.featured)!;
   const filtered =
@@ -133,16 +135,16 @@ export default function BlogPage() {
     <main style={{ position: "relative", backgroundColor: "#070707", overflowX: "hidden" }}>
 
       {/* ── HERO ─────────────────────────────────────────── */}
-      <div data-cursor-color={RED} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-        <div style={{ margin: "0 40px" }}>
+      <div data-cursor-color={RED} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+        <div style={{ margin: mx }}>
           <Navbar />
         </div>
-        <div style={{ margin: "0 40px", padding: "9em 5.56em 5em" }}>
+        <div style={{ margin: mx, padding: isMobile ? "6em 0 3em" : `9em ${sp} 5em` }}>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "80px",
+              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+              gap: isMobile ? "2em" : "80px",
               alignItems: "center",
             }}
           >
@@ -208,8 +210,8 @@ export default function BlogPage() {
       </div>
 
       {/* ── FEATURED POST ────────────────────────────────── */}
-      <div data-cursor-color={RED} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-        <div style={{ margin: "0 40px", padding: "0 5.56em 4em" }}>
+      <div data-cursor-color={RED} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+        <div style={{ margin: mx, padding: isMobile ? "0 0 3em" : `0 ${sp} 4em` }}>
           <AnimatedSection style={{ marginBottom: "1.5em" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "1.5em" }}>
               <span
@@ -233,10 +235,10 @@ export default function BlogPage() {
               <div
                 style={{
                   border: `1px solid ${RED_BORDER}`,
-                  padding: "3em",
+                  padding: isMobile ? "2em" : "3em",
                   display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: "60px",
+                  gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                  gap: isMobile ? "1.5em" : "60px",
                   alignItems: "center",
                 }}
               >
@@ -362,15 +364,16 @@ export default function BlogPage() {
       </div>
 
       {/* ── CATEGORY FILTER ──────────────────────────────── */}
-      <div data-cursor-color={RED} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
+      <div data-cursor-color={RED} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
         <div
           style={{
-            margin: "0 40px",
-            padding: "1em 5.56em",
+            margin: mx,
+            padding: isMobile ? "1em 0" : `1em ${sp}`,
             borderTop: `1px solid ${RED_BORDER}`,
             borderBottom: `1px solid ${RED_BORDER}`,
             display: "flex",
             alignItems: "center",
+            flexWrap: "wrap",
             gap: "0",
           }}
         >
@@ -415,8 +418,8 @@ export default function BlogPage() {
       </div>
 
       {/* ── POSTS GRID ───────────────────────────────────── */}
-      <div data-cursor-color={RED} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-        <div style={{ margin: "0 40px", padding: "3em 5.56em 4em" }}>
+      <div data-cursor-color={RED} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+        <div style={{ margin: mx, padding: isMobile ? "2em 0 3em" : `3em ${sp} 4em` }}>
           <motion.div
             key={activeCategory}
             variants={gridVariants}
@@ -424,7 +427,7 @@ export default function BlogPage() {
             animate="visible"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
+              gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr 1fr" : "repeat(3, 1fr)",
               gap: "2px",
             }}
           >
@@ -603,15 +606,15 @@ export default function BlogPage() {
       </div>
 
       {/* ── NEWSLETTER CTA ───────────────────────────────── */}
-      <div data-cursor-color={RED} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
+      <div data-cursor-color={RED} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
         <div
           style={{
-            margin: "0 40px",
-            padding: "4em 5.56em",
+            margin: mx,
+            padding: isMobile ? "3em 0" : `4em ${sp}`,
             borderTop: `1px solid ${RED_BORDER}`,
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "80px",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: isMobile ? "2em" : "80px",
             alignItems: "center",
           }}
         >
@@ -765,15 +768,16 @@ export default function BlogPage() {
       </div>
 
       {/* ── WRITE FOR US ─────────────────────────────────── */}
-      <div data-cursor-color={RED} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
+      <div data-cursor-color={RED} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
         <AnimatedSection>
           <div
             style={{
-              margin: "0 40px",
-              padding: "3em 5.56em",
+              margin: mx,
+              padding: isMobile ? "2em 0" : `3em ${sp}`,
               borderTop: `1px solid rgba(255,255,255,0.07)`,
               display: "flex",
-              alignItems: "center",
+              flexDirection: isMobile ? "column" : "row",
+              alignItems: isMobile ? "flex-start" : "center",
               justifyContent: "space-between",
               gap: "2em",
             }}

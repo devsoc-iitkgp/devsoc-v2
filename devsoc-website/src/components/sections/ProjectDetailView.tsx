@@ -7,6 +7,7 @@ import Navbar from "@/components/layout/Navbar";
 import Section5Contact from "@/components/sections/Section5Contact";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import type { ProjectDetail } from "@/data/projectDetails";
+import { useResponsive } from "@/components/ui/useResponsive";
 
 const YELLOW = "#edf738";
 const YELLOW_MUTED = "rgba(237, 247, 56, 0.35)";
@@ -41,6 +42,7 @@ export default function ProjectDetailView({
   const [activeId, setActiveId] = useState(project.sections[0]?.id ?? "");
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const { isMobile, isTablet, mx, sp } = useResponsive();
 
   const relatedProjects = allProjects.filter((p) => project.relatedSlugs.includes(p.slug));
 
@@ -78,20 +80,20 @@ export default function ProjectDetailView({
       />
 
       {/* Navbar */}
-      <div data-cursor-color={YELLOW} style={{ minWidth: "1440px", width: "100%", margin: "0 auto" }}>
-        <div style={{ margin: "0 40px" }}>
+      <div data-cursor-color={YELLOW} style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
+        <div style={{ margin: mx }}>
           <Navbar />
         </div>
 
         {/* Hero — full-width image with overlay */}
-        <div style={{ margin: "0 40px", paddingTop: "7em", position: "relative" }}>
-          <div style={{ position: "relative", overflow: "hidden", maxHeight: "480px" }}>
+        <div style={{ margin: mx, paddingTop: "7em", position: "relative" }}>
+          <div style={{ position: "relative", overflow: "hidden", maxHeight: isMobile ? "320px" : "480px" }}>
             <Image
               src={project.imgSrc}
               alt={project.title}
               width={1360}
               height={480}
-              style={{ width: "100%", height: "480px", objectFit: "cover" }}
+              style={{ width: "100%", height: isMobile ? "320px" : "480px", objectFit: "cover" }}
               priority
             />
             {/* Dark gradient overlay */}
@@ -104,7 +106,7 @@ export default function ProjectDetailView({
             <div style={{
               position: "absolute",
               inset: 0,
-              padding: "3em 5.56em",
+              padding: isMobile ? "1.5em" : "3em 5.56em",
               display: "flex",
               flexDirection: "column",
               justifyContent: "flex-end",
@@ -117,10 +119,10 @@ export default function ProjectDetailView({
                 <StatusBadge status={project.status} />
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                <Image src={project.vectorSrc} alt="" width={28} height={28} style={{ backgroundColor: "transparent" }} />
+                {!isMobile && <Image src={project.vectorSrc} alt="" width={28} height={28} style={{ backgroundColor: "transparent" }} />}
                 <h1 style={{
                   fontFamily: "var(--font-byrd), sans-serif",
-                  fontSize: "5em",
+                  fontSize: isMobile ? "2.5em" : "5em",
                   textTransform: "uppercase",
                   lineHeight: 1,
                   color: YELLOW,
@@ -148,11 +150,11 @@ export default function ProjectDetailView({
 
         {/* Main 2-col content grid */}
         <div style={{
-          margin: "0 40px",
-          padding: "4em 5.56em 5em",
+          margin: mx,
+          padding: isMobile ? "2em 0 3em" : `4em ${sp} 5em`,
           display: "grid",
-          gridTemplateColumns: "1fr 320px",
-          gap: "80px",
+          gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr 280px" : "1fr 320px",
+          gap: isMobile ? "0" : "80px",
           alignItems: "start",
         }}>
 
@@ -242,7 +244,8 @@ export default function ProjectDetailView({
             </AnimatedSection>
           </article>
 
-          {/* Right: sticky sidebar */}
+          {/* Right: sticky sidebar — hidden on mobile */}
+          {!isMobile && (
           <aside style={{ position: "sticky", top: "100px", display: "flex", flexDirection: "column", gap: "2px" }}>
 
             {/* TOC */}
@@ -369,7 +372,15 @@ export default function ProjectDetailView({
               </div>
             </a>
           </aside>
+          )}
         </div>
+
+        {/* Mobile back link */}
+        {isMobile && (
+          <div style={{ margin: mx, paddingBottom: "2em" }}>
+            <a href="/projects" style={{ textDecoration: "none", fontFamily: "var(--font-byrd), sans-serif", fontSize: "0.7rem", color: YELLOW, letterSpacing: "2px" }}>← ALL PROJECTS</a>
+          </div>
+        )}
       </div>
 
       <Section5Contact />
