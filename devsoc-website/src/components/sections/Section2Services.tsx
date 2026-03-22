@@ -40,17 +40,17 @@ export default function Section2Services() {
             <h2 style={{ color: "rgba(220, 43, 70, 0.4)", fontFamily: "var(--font-byrd), sans-serif", fontSize: isMobile ? "2.2em" : "3.5em", fontWeight: 900, textTransform: "uppercase", lineHeight: 1.2 }}>
               DEVELOPER WORKSHOPS
             </h2>
-            <section style={{ position: isMobile ? "relative" : "absolute", top: isMobile ? undefined : "34px", marginLeft: isMobile ? 0 : "2em", marginTop: isMobile ? "-0.3em" : undefined }}>
-              <h2 style={{ color: "#dc2b46", fontFamily: "var(--font-byrd), sans-serif", fontSize: isMobile ? "2.2em" : "3.5em", fontWeight: 900, textTransform: "uppercase", lineHeight: 1.2, position: isMobile ? "relative" : "absolute" }}>
+            <section style={{ position: isMobile || isTablet ? "relative" : "absolute", top: isMobile || isTablet ? undefined : "34px", marginLeft: isMobile || isTablet ? 0 : "2em", marginTop: isMobile || isTablet ? "-0.3em" : undefined }}>
+              <h2 style={{ color: "#dc2b46", fontFamily: "var(--font-byrd), sans-serif", fontSize: isMobile ? "2.2em" : isTablet ? "3em" : "3.5em", fontWeight: 900, textTransform: "uppercase", lineHeight: 1.2, position: isMobile || isTablet ? "relative" : "absolute" }}>
                 PROJECTS
               </h2>
-              {!isMobile && (
+              {!isMobile && !isTablet && (
                 <button style={{ position: "absolute", borderRadius: "2px", padding: "2px 4px 4px", backgroundColor: "#dc2b46", color: "#070707", top: "60px", width: "200px", fontSize: "1.5em", fontWeight: 900, fontFamily: "var(--font-byrd), sans-serif" }}>
                   OUR MISSION
                 </button>
               )}
             </section>
-            {isMobile && (
+            {(isMobile || isTablet) && (
               <button style={{ marginTop: "0.5em", borderRadius: "2px", padding: "4px 12px", backgroundColor: "#dc2b46", color: "#070707", fontSize: "1em", fontWeight: 900, fontFamily: "var(--font-byrd), sans-serif" }}>
                 OUR MISSION
               </button>
@@ -58,9 +58,9 @@ export default function Section2Services() {
           </AnimatedSection>
 
           {/* Programs + mission items */}
-          <div style={{ marginTop: isMobile ? "2em" : "380px", position: "relative" }}>
-            {/* Mission vector — desktop only */}
-            {!isMobile && (
+          <div style={{ marginTop: isMobile || isTablet ? "2em" : "380px", position: "relative" }}>
+            {/* Mission vector — large desktop only */}
+            {!isMobile && !isTablet && (
               <AnimatedSection
                 style={{
                   display: "flex",
@@ -85,10 +85,10 @@ export default function Section2Services() {
               </AnimatedSection>
             )}
 
-            {/* Mobile mission items */}
-            {isMobile && (
+            {/* Mobile + tablet mission items */}
+            {(isMobile || isTablet) && (
               <AnimatedSection style={{ marginBottom: "2em" }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <div style={{ display: isTablet ? "grid" : "flex", gridTemplateColumns: isTablet ? "1fr 1fr" : undefined, flexDirection: isMobile ? "column" : undefined, gap: "10px" }}>
                   {missionItems.map((item, idx) => (
                     <div key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
                       <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#dc2b46", flexShrink: 0, marginTop: "6px" }} />
@@ -100,7 +100,7 @@ export default function Section2Services() {
             )}
 
             {/* Programs table */}
-            <div style={{ width: isMobile ? "100%" : "40%", position: "relative" }}>
+            <div style={{ width: isMobile || isTablet ? "100%" : "40%", position: "relative" }}>
               <div>
                 <div style={{ border: "1px solid rgba(220, 43, 70, 0.4)", padding: "5px" }} />
                 <div style={{ width: "100%" }}>
@@ -115,7 +115,7 @@ export default function Section2Services() {
                   ))}
                 </div>
               </div>
-              <button style={{ position: isMobile ? "relative" : "absolute", right: 0, bottom: 0, color: "#dc2b46", border: "1px solid #dc2b46", backgroundColor: "transparent", fontFamily: "var(--font-byrd), sans-serif", marginTop: isMobile ? "1em" : undefined }}>
+              <button style={{ position: isMobile || isTablet ? "relative" : "absolute", right: 0, bottom: 0, color: "#dc2b46", border: "1px solid #dc2b46", backgroundColor: "transparent", fontFamily: "var(--font-byrd), sans-serif", marginTop: isMobile || isTablet ? "1em" : undefined }}>
                 JOIN DEVSOC
               </button>
             </div>
