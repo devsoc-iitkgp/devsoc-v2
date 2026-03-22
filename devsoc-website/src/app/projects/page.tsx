@@ -12,6 +12,7 @@ const YELLOW_BORDER = "rgba(237, 247, 56, 0.2)";
 
 const projects = [
   {
+    slug: "unitrack",
     imgSrc: "/assets/section1/Img1.png",
     vectorSrc: "/assets/section1/vector1.png",
     title: "UNITRACK",
@@ -22,6 +23,7 @@ const projects = [
     status: "ACTIVE",
   },
   {
+    slug: "hackportal",
     imgSrc: "/assets/section1/Img2.png",
     vectorSrc: "/assets/section1/vector2.png",
     title: "HACKPORTAL",
@@ -32,6 +34,7 @@ const projects = [
     status: "OPEN SOURCE",
   },
   {
+    slug: "devsoc-app",
     imgSrc: "/assets/section1/Img3.png",
     vectorSrc: "/assets/section1/vector3.png",
     title: "DEVSOC APP",
@@ -42,6 +45,7 @@ const projects = [
     status: "ACTIVE",
   },
   {
+    slug: "openlms",
     imgSrc: "/assets/section1/Img4.png",
     vectorSrc: "/assets/section1/vector4.png",
     title: "OPENLMS",
@@ -504,6 +508,21 @@ export default function ProjectsPage() {
                   {/* CTA */}
                   <div style={{ marginTop: "auto", display: "flex", gap: "1em" }}>
                     <a
+                      href={`/projects/${project.slug}`}
+                      style={{
+                        fontFamily: "var(--font-byrd), sans-serif",
+                        fontSize: "0.7rem",
+                        letterSpacing: "2px",
+                        color: "#070707",
+                        textDecoration: "none",
+                        backgroundColor: YELLOW,
+                        borderRadius: "100px",
+                        padding: "8px 22px",
+                      }}
+                    >
+                      VIEW DETAILS →
+                    </a>
+                    <a
                       href={project.github}
                       style={{
                         fontFamily: "var(--font-byrd), sans-serif",
@@ -516,7 +535,7 @@ export default function ProjectsPage() {
                         padding: "8px 22px",
                       }}
                     >
-                      VIEW ON GITHUB →
+                      GITHUB →
                     </a>
                   </div>
                 </div>

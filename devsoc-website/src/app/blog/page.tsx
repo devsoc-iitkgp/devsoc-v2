@@ -5,6 +5,9 @@ import { motion, type Variants } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Section5Contact from "@/components/sections/Section5Contact";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import blogPosts from "@/data/blogPosts";
+
+const posts = blogPosts;
 
 const RED = "#dc2b46";
 const RED_MUTED = "rgba(220, 43, 70, 0.35)";
@@ -13,105 +16,6 @@ const WHITE = "rgba(255,255,255,0.9)";
 const MUTED = "rgba(255,255,255,0.4)";
 
 const CATEGORIES = ["ALL", "TUTORIAL", "DEVLOG", "OPINION", "CAREER", "OPEN SOURCE"];
-
-const posts = [
-  {
-    slug: "building-hackportal",
-    title: "How We Built HackPortal in 3 Weeks",
-    excerpt:
-      "From napkin sketch to production: a behind-the-scenes look at how our team shipped an open-source hackathon platform in 21 days — what worked, what didn't, and what we'd do differently.",
-    category: "DEVLOG",
-    author: "Alex Chen",
-    date: "12 MAR 2025",
-    readTime: "8 min read",
-    featured: true,
-    tags: ["next.js", "open source", "hackathon"],
-  },
-  {
-    slug: "typescript-tips-2025",
-    title: "10 TypeScript Patterns We Actually Use",
-    excerpt:
-      "Forget theoretical type gymnastics. These are the patterns our dev team reaches for every single day when building real production apps.",
-    category: "TUTORIAL",
-    author: "Maya Patel",
-    date: "5 MAR 2025",
-    readTime: "6 min read",
-    featured: false,
-    tags: ["typescript", "web dev", "patterns"],
-  },
-  {
-    slug: "contributing-to-oss",
-    title: "Your First Open Source Contribution — A Practical Guide",
-    excerpt:
-      "Open source feels intimidating from the outside. Here's the exact process we use to onboard new DevSoc members into their first PR — from choosing an issue to getting merged.",
-    category: "OPEN SOURCE",
-    author: "Dev Kapoor",
-    date: "28 FEB 2025",
-    readTime: "5 min read",
-    featured: false,
-    tags: ["git", "oss", "beginners"],
-  },
-  {
-    slug: "tech-interview-prep",
-    title: "How DevSoc Members Land Tech Internships",
-    excerpt:
-      "Data from 40+ member internship cycles: which companies recruit from universities, what they actually test, and how building society projects gives you an edge in interviews.",
-    category: "CAREER",
-    author: "Priya Sharma",
-    date: "20 FEB 2025",
-    readTime: "10 min read",
-    featured: false,
-    tags: ["internships", "interviews", "career"],
-  },
-  {
-    slug: "react-vs-vue-2025",
-    title: "React vs Vue in 2025 — An Honest Take",
-    excerpt:
-      "We've shipped projects in both. Here's an opinionated comparison based on actual developer experience, not benchmarks from a blog post with an agenda.",
-    category: "OPINION",
-    author: "Liam Nguyen",
-    date: "14 FEB 2025",
-    readTime: "7 min read",
-    featured: false,
-    tags: ["react", "vue", "frontend"],
-  },
-  {
-    slug: "postgres-for-beginners",
-    title: "PostgreSQL for Students Who Only Know MySQL",
-    excerpt:
-      "Coming from a database course that only covered MySQL? Here's everything you need to be productive with PostgreSQL in your first DevSoc project team.",
-    category: "TUTORIAL",
-    author: "Chris Wong",
-    date: "6 FEB 2025",
-    readTime: "9 min read",
-    featured: false,
-    tags: ["postgresql", "databases", "backend"],
-  },
-  {
-    slug: "devops-for-students",
-    title: "DevOps Without the Overwhelm",
-    excerpt:
-      "CI/CD, containers, cloud — it sounds like a lot. But for a student side project or society app, you only need a small fraction of it. Here's what matters and in what order.",
-    category: "TUTORIAL",
-    author: "Aisha Okonkwo",
-    date: "28 JAN 2025",
-    readTime: "8 min read",
-    featured: false,
-    tags: ["devops", "docker", "github actions"],
-  },
-  {
-    slug: "why-open-source",
-    title: "Why Every CS Student Should Contribute to Open Source",
-    excerpt:
-      "The portfolio argument is real, but it's not even the best reason. Open source teaches you something no lecture or tutorial can: how professional software is actually written.",
-    category: "OPINION",
-    author: "Jordan Lee",
-    date: "15 JAN 2025",
-    readTime: "4 min read",
-    featured: false,
-    tags: ["oss", "students", "growth"],
-  },
-];
 
 // Inline SVG — document/text themed vector
 function DocumentVector() {
