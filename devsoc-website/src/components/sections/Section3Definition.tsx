@@ -38,10 +38,10 @@ export default function Section3Definition() {
           {!isMobile && (
             <>
               <div style={{ position: "absolute", background: "transparent", top: "38%", right: "30%" }}>
-                <Image src="/assets/section3/star.png" alt="star" width={60} height={60} style={{ background: "transparent" }} />
+                <Image src="/assets/section3/star.png" alt="star" width={160} height={160} style={{ background: "transparent" }} />
               </div>
               <div style={{ position: "absolute", background: "transparent", bottom: "150px", right: "8%" }}>
-                <Image src="/assets/section3/cube.png" alt="cube" width={60} height={60} style={{ background: "transparent" }} />
+                <Image src="/assets/section3/cube.png" alt="cube" width={160} height={160} style={{ background: "transparent" }} />
               </div>
             </>
           )}

@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import LineAnimation from "@/components/ui/LineAnimation";
 import testimonials from "@/data/testimonials";
 import { useResponsive } from "@/components/ui/useResponsive";
@@ -10,19 +9,48 @@ export default function Section4Testimonials() {
   const { isMobile, isTablet, mx, sp } = useResponsive();
 
   return (
-    <div data-cursor-color="#3e6dd9" style={{ width: "100%", maxWidth: "1440px", margin: "0 auto" }}>
-      <div style={{ margin: mx, padding: sp }}>
-        {/* Section image */}
-        <div style={{ overflow: "hidden" }}>
-          <motion.div
-            initial={{ y: "100%" }}
-            whileInView={{ y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, ease: "easeOut" as const }}
-          >
-            <Image src="/assets/section4/img.png" alt="Community" width={1300} height={600} style={{ width: "100%", height: "auto" }} />
-          </motion.div>
-        </div>
+    <div data-cursor-color="#3e6dd9" style={{ width: "100%", maxWidth: "full", margin: "0 auto" }}>
+      <div style={{ margin: mx, paddingLeft: sp, paddingRight: sp, paddingTop: "2em", paddingBottom: sp }}>
+        {/* Section watermark */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.8 }}
+          style={{ width: "100%", marginBottom: isMobile ? "0.5em" : "1em", overflow: "hidden" }}
+        >
+          {/* Line 1 — DEVELOPER */}
+          <div style={{
+            fontFamily: "var(--font-byrd), sans-serif",
+            fontSize: "clamp(3rem, 13.5vw, 13rem)",
+            lineHeight: 0.92,
+            textTransform: "uppercase",
+            fontWeight: 900,
+            color: "transparent",
+            WebkitTextStroke: "1.5px rgba(62, 109, 217, 0.5)",
+            whiteSpace: "nowrap",
+            userSelect: "none",
+            pointerEvents: "none",
+            letterSpacing: "0.18em",
+          }}>
+            DEVSOC
+          </div>
+          {/* Line 2 — SOCIETY · BUILD · SHIP */}
+          <div style={{
+            fontFamily: "var(--font-byrd), sans-serif",
+            fontSize: "clamp(2rem, 8.8vw, 8.5rem)",
+            lineHeight: 0.95,
+            textTransform: "uppercase",
+            fontWeight: 900,
+            color: "rgba(62, 109, 217, 0.18)",
+            whiteSpace: "nowrap",
+            userSelect: "none",
+            pointerEvents: "none",
+            letterSpacing: "0.06em",
+          }}>
+           BUILD · SHIP · GROW
+          </div>
+        </motion.div>
 
         {/* Clients banner */}
         <div style={{ marginTop: "2.5em" }}>

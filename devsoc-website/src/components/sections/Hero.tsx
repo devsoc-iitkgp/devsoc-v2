@@ -37,8 +37,8 @@ export default function Hero() {
             <Image
               src="/assets/flower.png"
               alt="Rotating flower"
-              width={23}
-              height={23}
+              width={isTablet ? 34 : 23}
+              height={isTablet ? 34 : 23}
               style={{ animation: "rotate 10s linear infinite", margin: "auto" }}
             />
           </div>
@@ -137,9 +137,15 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 2, duration: 2 }}
-                style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", backgroundColor: "transparent" }}
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: isTablet ? "translate(-50%, -50%) scale(1.5)" : "translate(-50%, -50%) scale(1.7)",
+                  backgroundColor: "transparent",
+                }}
               >
-                <Image src="/assets/vector1.png" alt="Vector" width={508} height={222} style={{ backgroundColor: "transparent", width: isTablet ? "320px" : "420px", height: "auto" }} />
+                <Image src="/assets/vector1.png" alt="Vector" width={980} height={431} style={{ backgroundColor: "transparent", width: isTablet ? "680px" : "920px", height: "auto" }} />
               </motion.div>
 
               <motion.div
