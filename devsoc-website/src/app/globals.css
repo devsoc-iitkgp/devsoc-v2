@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ds-bg: #070707;
+  --color-ds-yellow: #edf738;
+  --color-ds-red: #dc2b46;
+  --color-ds-blue: #3e6dd9;
+  --color-ds-muted: rgba(232, 232, 232, 0.4);
+  --color-ds-red-muted: rgba(220, 43, 70, 0.4);
+  --color-ds-blue-muted: rgba(62, 109, 217, 0.4);
+  --color-ds-blue-mid: rgba(62, 109, 217, 0.7);
+
+  --font-byrd: var(--font-bebas), sans-serif;
+  --font-kobeweb: var(--font-space-grotesk), sans-serif;
+  --font-newforest: var(--font-playfair), serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #070707;
+  color: white;
+  font-family: var(--font-kobeweb), sans-serif;
+}
+
+*, *::before, *::after {
+  cursor: none !important;
+}
+
+button {
+  font-family: var(--font-byrd), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 100px;
+  height: 2.78rem;
+  padding: 1em 1.5em;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
