@@ -19,9 +19,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #070707;
   color: white;
   font-family: var(--font-kobeweb), sans-serif;
+}
+
+html,
+body {
+  background-color: #070707;
 }
 
 *, *::before, *::after {
