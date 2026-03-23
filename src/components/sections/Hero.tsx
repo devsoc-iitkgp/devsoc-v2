@@ -5,6 +5,134 @@ import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import { useResponsive } from "@/components/ui/useResponsive";
 
+// ─── Code background ─────────────────────────────────────────────────────────
+
+type Snippet = {
+  text: string;
+  x: number; // left %
+  y: number; // top %
+  opacity: number;
+  color: string;
+  delay: number;
+  cursor?: boolean;
+};
+
+const SNIPPETS: Snippet[] = [
+  // top band
+  { text: "git init && git remote add origin", x: 3, y: 7, opacity: 0.09, color: "#edf738", delay: 0.6 },
+  { text: "npm create next-app@latest devsoc-v2", x: 57, y: 6, opacity: 0.055, color: "#ffffff", delay: 0.9 },
+  { text: "const [open, setOpen] = useState(false)", x: 74, y: 12, opacity: 0.05, color: "#ffffff", delay: 1.3 },
+
+  // second band
+  { text: "docker compose up --build -d", x: 2, y: 19, opacity: 0.055, color: "#ffffff", delay: 1.1 },
+  { text: "import { motion } from 'framer-motion'", x: 35, y: 17, opacity: 0.075, color: "#3e6dd9", delay: 0.7 },
+  { text: "git push origin main", x: 81, y: 20, opacity: 0.09, color: "#edf738", delay: 1.5 },
+
+  // third band
+  { text: "export default function Page() {", x: 1, y: 28, opacity: 0.05, color: "#ffffff", delay: 1.0 },
+  { text: "npx prisma migrate dev --name init", x: 64, y: 27, opacity: 0.055, color: "#ffffff", delay: 1.4 },
+
+  // fourth band — sparse near heading
+  { text: "git commit -m 'feat: launch devsoc v2 ✨'", x: 2, y: 37, opacity: 0.09, color: "#edf738", delay: 0.5 },
+  { text: "type Props = { children: React.ReactNode }", x: 72, y: 36, opacity: 0.055, color: "#3e6dd9", delay: 1.2 },
+
+  // terminal prompt — far left mid
+  { text: "$ devsoc --init", x: 1, y: 46, opacity: 0.13, color: "#edf738", delay: 0.3, cursor: true },
+  { text: "SELECT * FROM projects WHERE active = true", x: 80, y: 45, opacity: 0.045, color: "#ffffff", delay: 1.6 },
+
+  // sixth band
+  { text: "const res = await fetch('/api/events')", x: 2, y: 56, opacity: 0.055, color: "#ffffff", delay: 1.1 },
+  { text: "yarn add @mui/icons-material framer-motion", x: 58, y: 55, opacity: 0.05, color: "#ffffff", delay: 1.3 },
+
+  // seventh band
+  { text: "git rebase -i HEAD~3", x: 3, y: 66, opacity: 0.08, color: "#edf738", delay: 0.8 },
+  { text: "interface User { id: string; role: string }", x: 52, y: 64, opacity: 0.055, color: "#3e6dd9", delay: 1.0 },
+  { text: "npm run build && npm run start", x: 84, y: 67, opacity: 0.08, color: "#edf738", delay: 0.65 },
+
+  // eighth band
+  { text: "useEffect(() => { fetchData() }, [])", x: 2, y: 76, opacity: 0.05, color: "#ffffff", delay: 1.4 },
+  { text: "curl -X POST https://api.devsoc.dev/register", x: 40, y: 75, opacity: 0.05, color: "#ffffff", delay: 1.1 },
+  { text: "git stash && git checkout -b feature/new", x: 78, y: 77, opacity: 0.07, color: "#edf738", delay: 0.9 },
+
+  // bottom band
+  { text: "pnpm install --frozen-lockfile", x: 3, y: 86, opacity: 0.055, color: "#ffffff", delay: 1.2 },
+  { text: "git cherry-pick a1b2c3d4", x: 38, y: 84, opacity: 0.08, color: "#edf738", delay: 0.75 },
+  { text: "export type { User, Project, Event }", x: 70, y: 87, opacity: 0.05, color: "#ffffff", delay: 1.5 },
+];
+
+// Subset for mobile (just the ones near edges, fewer items)
+const MOBILE_SNIPPETS = SNIPPETS.filter((_, i) => i % 3 === 0).map((s) => ({
+  ...s,
+  opacity: s.opacity * 0.8,
+}));
+
+function CodeBackground({ mobile }: { mobile: boolean }) {
+  const list = mobile ? MOBILE_SNIPPETS : SNIPPETS;
+
+  return (
+    <div
+      aria-hidden
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        zIndex: 1,
+        pointerEvents: "none",
+      }}
+    >
+      {/* Radial vignette — darkens centre so heading stays legible */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(ellipse 55% 45% at 50% 48%, rgba(7,7,7,0.82) 0%, transparent 100%)",
+          zIndex: 2,
+        }}
+      />
+
+      {list.map((s, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: s.opacity, y: 0 }}
+          transition={{ delay: s.delay, duration: 2.8, ease: "easeOut" }}
+          style={{
+            position: "absolute",
+            left: `${s.x}%`,
+            top: `${s.y}%`,
+            color: s.color,
+            fontFamily: "'Courier New', Courier, monospace",
+            fontSize: mobile ? "0.6rem" : "0.68rem",
+            letterSpacing: "0.04em",
+            whiteSpace: "nowrap",
+            fontWeight: 400,
+            textShadow:
+              s.color === "#edf738"
+                ? "0 0 12px rgba(237,247,56,0.35)"
+                : s.color === "#3e6dd9"
+                ? "0 0 10px rgba(62,109,217,0.3)"
+                : "none",
+          }}
+        >
+          {s.text}
+          {s.cursor && (
+            <motion.span
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ repeat: Infinity, duration: 1.1, ease: "steps(1)" }}
+              style={{ marginLeft: "2px" }}
+            >
+              ▌
+            </motion.span>
+          )}
+        </motion.span>
+      ))}
+    </div>
+  );
+}
+
+// ─── Hero variants ────────────────────────────────────────────────────────────
+
 const containerVariants: Variants = {
   hidden: {},
   visible: {
@@ -21,6 +149,8 @@ const itemVariants: Variants = {
   },
 };
 
+// ─── Component ───────────────────────────────────────────────────────────────
+
 export default function Hero() {
   const { isMobile, isTablet } = useResponsive();
 
@@ -31,6 +161,9 @@ export default function Hero() {
       </div>
 
       <div style={{ position: "relative" }}>
+        {/* Code background */}
+        <CodeBackground mobile={isMobile} />
+
         {/* Rotating flower — hide on mobile */}
         {!isMobile && (
           <div style={{ position: "absolute", left: "49%", top: "20%", zIndex: 4, textAlign: "center" }}>
@@ -52,6 +185,8 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             style={{
+              position: "relative",
+              zIndex: 2,
               minHeight: "80vh",
               display: "flex",
               flexDirection: "column",
@@ -100,13 +235,14 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             style={{
+              position: "relative",
+              zIndex: 2,
               height: "90vh",
               display: "grid",
               gridTemplateColumns: isTablet ? "1fr 4fr 1fr" : "1fr 3fr 1fr",
               padding: isTablet ? "35px 40px" : "35px 88px",
               margin: isTablet ? "0 24px" : "0 40px",
               alignItems: "center",
-              position: "relative",
             }}
           >
             <motion.div variants={itemVariants} style={{ color: "#edf738", fontSize: "0.97em", display: "flex", alignItems: "center" }}>
@@ -169,7 +305,7 @@ export default function Hero() {
         )}
 
         {/* Shake arrow */}
-        <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)" }}>
+        <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
           <Image src="/svgArrow.svg" alt="Scroll down" width={24} height={24} style={{ animation: "shake 2s infinite", color: "#edf738" }} />
         </div>
       </div>
