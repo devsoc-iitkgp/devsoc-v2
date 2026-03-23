@@ -118,8 +118,8 @@ function CodeBackground({ mobile }: { mobile: boolean }) {
           {s.text}
           {s.cursor && (
             <motion.span
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ repeat: Infinity, duration: 1.1, ease: "steps(1)" }}
+              animate={{ opacity: [1, 1, 0, 0] }}
+              transition={{ repeat: Infinity, duration: 1.1, ease: "linear", times: [0, 0.5, 0.5, 1] }}
               style={{ marginLeft: "2px" }}
             >
               ▌
