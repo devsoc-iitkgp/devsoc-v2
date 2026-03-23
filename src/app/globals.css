@@ -48,3 +48,38 @@ button {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
+
+/* ─── Smooth scroll ─────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ─── Reduced-motion: pause all CSS animations & transitions ─────── */
+/*
+ * Framer Motion also checks useReducedMotion() / MotionConfig.
+ * This rule covers any remaining CSS-driven animations (rotate, shake).
+ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Focus-visible — keyboard nav ring ────────────────────────── */
+/*
+ * We hide the native cursor but must preserve keyboard focus indicators
+ * for accessibility. This ring is visually coherent with the ds-yellow theme.
+ */
+:focus-visible {
+  outline: 2px solid #edf738;
+  outline-offset: 3px;
+}
+
+/* ─── Selection colour ───────────────────────────────────────────── */
+::selection {
+  background-color: rgba(237, 247, 56, 0.25);
+  color: #edf738;
+}

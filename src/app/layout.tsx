@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Space_Grotesk, Playfair_Display } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import CustomCursor from "@/components/ui/CustomCursor";
+import ScrollProgress from "@/components/ui/ScrollProgress";
+import PageTransition from "@/components/ui/PageTransition";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -37,8 +40,22 @@ export default function RootLayout({
       className={`${bebasNeue.variable} ${spaceGrotesk.variable} ${playfairDisplay.variable}`}
     >
       <body>
-        <CustomCursor />
-        {children}
+        {/*
+         * MotionConfig — site-wide Framer Motion settings.
+         * reducedMotion="user" reads prefers-reduced-motion from the OS
+         * and automatically disables/minimises all motion variants.
+         * This covers every motion.* component globally — no per-component
+         * useReducedMotion() checks needed.
+         */}
+        <MotionConfig reducedMotion="user">
+          {/* Thin scroll progress bar fixed at the top of the viewport */}
+          <ScrollProgress color="#edf738" height={2} />
+
+          <CustomCursor />
+
+          {/* Route-change fade + translateY transition */}
+          <PageTransition>{children}</PageTransition>
+        </MotionConfig>
       </body>
     </html>
   );
