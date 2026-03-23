@@ -50,7 +50,7 @@ export const duration = {
 } as const;
 
 // ─── Helper: build a Transition object ───────────────────────────────────────
-export const t = (d = duration.normal, delay = 0): Transition => ({
+export const t = (d: number = duration.normal, delay: number = 0): Transition => ({
   duration: d,
   ease: ease.out,
   delay,
